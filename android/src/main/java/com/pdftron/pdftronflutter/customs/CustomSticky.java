@@ -12,7 +12,7 @@ import com.pdftron.pdf.tools.ToolManager;
 
 public class CustomSticky extends StickyNoteCreate {
 
-    public static ToolManager.ToolModeBase MODE = ToolManager.ToolMode.TEXT_ANNOT_CREATE;
+    public static ToolManager.ToolModeBase MODE = ToolManager.ToolMode.addNewMode(Annot.e_Widget);
 
     public CustomSticky(@NonNull PDFViewCtrl ctrl) {
         super(ctrl);
@@ -31,9 +31,9 @@ public class CustomSticky extends StickyNoteCreate {
     @Override
     public void setTargetPoint(PointF point) {
 //        super.setTargetPoint(point);
-        super.mPt1.x = point.x + (float)super.mPdfViewCtrl.getScrollX();
-        super.mPt1.y = point.y + (float)super.mPdfViewCtrl.getScrollY();
-        super.mDownPageNum = super.mPdfViewCtrl.getPageNumberFromScreenPt((double)point.x, (double)point.y);
+        mPt1.x = point.x + (float)mPdfViewCtrl.getScrollX();
+        mPt1.y = point.y + (float)mPdfViewCtrl.getScrollY();
+        mDownPageNum = mPdfViewCtrl.getPageNumberFromScreenPt(point.x, point.y);
         super.createStickyNote();
         // TODO: call the own pop-up
     }
